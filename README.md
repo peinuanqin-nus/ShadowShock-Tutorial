@@ -5,7 +5,7 @@
 3. 但是上述教程在第 (2) 在服务器上配置 shadowshock 那一步总是会出现各种问题，所以我单独构建了这个教程作为一个补丁，帮助大家解决如何在已经完成 (1) 购买一个简单的海外服务器的前提下配置 shadowshock 的问题
 
 ## 步骤和代码
-你现在应该已经完成了 [教程](https://github.com/zhaoweih/Shadowsocks-Tutorial?tab=readme-ov-file) 中的前 8 个步骤
+你现在应该已经完成了 [教程](https://github.com/zhaoweih/Shadowsocks-Tutorial?tab=readme-ov-file) 中的前 8 个步骤，现在让我们继续后面的部分！
 
 ### 在服务器安装 SS
 
