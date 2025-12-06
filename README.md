@@ -5,36 +5,36 @@
 3. 但是上述教程在第 (2) 在服务器上配置 shadowshock 那一步总是会出现各种问题，所以我单独构建了这个教程作为一个补丁，帮助大家解决如何在已经完成 (1) 购买一个简单的海外服务器的前提下配置 shadowshock 的问题
 
 ## 步骤和代码
-```text
 你现在应该已经完成了 [教程](https://github.com/zhaoweih/Shadowsocks-Tutorial?tab=readme-ov-file) 中的前 8 个步骤
-```
+
 ### 在服务器安装 SS
 
 #### 1. 更新系统 
 ```bash
 sudo dnf update -y
 ```
+
 #### 2. 安装编译依赖和工具
-```bash
-sudo dnf install -y epel-release
-sudo dnf install -y autoconf automake libtool gcc make \
-  asciidoc xmlto git \
-  c-ares-devel libev-devel mbedtls-devel pcre-devel
-```
 
-安装 libsodium 依赖
-
+启用 CRB 仓库，这对 Centos 9 系统至关重要
 ```bash
 sudo dnf config-manager --set-enabled crb
-sudo dnf install -y libsodium libsodium-devel
+```
+
+```bash
+sudo dnf install -y autoconf automake libtool gcc git make \
+  c-ares-devel libev-devel libsodium-devel openssl-devel \
+  pcre-devel mbedtls-devel asciidoc xmlto
 ```
 
 #### 3. 下载 Shadowsocks-libev 源码（必须带子模块, 命令里面必须用 recursive）
+
 ```bash
 git clone --recursive https://github.com/shadowsocks/shadowsocks-libev.git
 cd shadowsocks-libev
 ```
 #### 4. 编译 Shadowsocks-libev
+
 ```bash
 ./autogen.sh
 ./configure
@@ -42,6 +42,7 @@ make
 sudo make install
 ```
 验证安装路径
+
 ```bash
 which ss-server
 ```
@@ -51,6 +52,7 @@ which ss-server
 ```
 
 #### 5. 创建配置文件
+
 ```bash
 sudo mkdir -p /etc/shadowsocks-libev
 sudo tee /etc/shadowsocks-libev/config.json << EOF
@@ -72,6 +74,7 @@ EOF
 
 #### 6. 创建 systemd 服务文件
 
+
 ```bash
 sudo tee /etc/systemd/system/shadowsocks-libev.service << EOF
 [Unit]
@@ -90,16 +93,20 @@ EOF
 ```
 
 #### 7. 启动服务并设置开机自启
+
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable --now shadowsocks-libev
 ```
+
 查看状态：
+
 ```bash
 systemctl status shadowsocks-libev
 ```
 
 应该显示：
+
 ```bash
 Active: active (running)
 ```
@@ -118,14 +125,17 @@ sudo firewall-cmd --reload
 
 #### 9. 运行和维护命令
 重启服务：
+
 ```bash
 sudo systemctl restart shadowsocks-libev
 ```
 停止服务：
+
 ```bash
 sudo systemctl stop shadowsocks-libev
 ```
 查看日志：
+
 ```bash
 journalctl -u shadowsocks-libev -f
 ```
