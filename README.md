@@ -20,7 +20,7 @@ sudo dnf update -y
 ```bash
 sudo dnf config-manager --set-enabled crb
 ```
-
+安装依赖
 ```bash
 sudo dnf install -y autoconf automake libtool gcc git make \
   c-ares-devel libev-devel libsodium-devel openssl-devel \
