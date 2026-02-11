@@ -32,6 +32,7 @@ sudo dnf install -y autoconf automake libtool gcc git make \
 ```bash
 git clone --recursive https://github.com/shadowsocks/shadowsocks-libev.git
 cd shadowsocks-libev
+git checkout v3.3.5
 ```
 #### 4. 编译 Shadowsocks-libev
 
